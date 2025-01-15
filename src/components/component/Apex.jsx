@@ -9,7 +9,7 @@ const ApexChart = ({ companySelection }) => {
 
     // Transform the filtered data for the chart
     const transformedData = filterData.map(item => ({
-        x: new Date(item.Date),
+        x: new Date(),
         y: [item.Open, item.High, item.Low, item.Close]
     }));
 
@@ -17,20 +17,20 @@ const ApexChart = ({ companySelection }) => {
     setSeries([{ data: transformedData }]);
     console.log(series)
 
-    useEffect(() => {
-        // Filter data based on selected company name
-        const filterData = data.filter(item => item.Name === companySelection);
+    // useEffect(() => {
+    //     // Filter data based on selected company name
+    //     const filterData = data.filter(item => item.Name === companySelection);
 
-        // Transform the filtered data for the chart
-        const transformedData = filterData.map(item => ({
-            x: new Date(item.Date),
-            y: [item.Open, item.High, item.Low, item.Close]
-        }));
+    //     // Transform the filtered data for the chart
+    //     const transformedData = filterData.map(item => ({
+    //         x: new Date(),
+    //         y: [item.Open, item.High, item.Low, item.Close]
+    //     }));
 
-        // Update the chart's series with the new transformed data
-        setSeries([{ data: transformedData }]);
-        console.log(series)
-    }, [companySelection]); // Runs whenever companySelection changes
+    //     // Update the chart's series with the new transformed data
+    //     setSeries([{ data: transformedData }]);
+    //     console.log(series)
+    // }, [companySelection]); // Runs whenever companySelection changes
 
     const options = {
         chart: {
