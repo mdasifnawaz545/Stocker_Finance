@@ -5,6 +5,7 @@ import data from "../../constant/data";
 
 const ApexChart = ({ companySelection, chartType, period }) => {
   const [series, setSeries] = useState([]);
+  const [brushSeries, setBrushSeries] = useState([]);
 
   useEffect(() => {
     const filterData = data.filter((item) => item.Name === companySelection);
@@ -33,12 +34,13 @@ const ApexChart = ({ companySelection, chartType, period }) => {
       x: new Date(item.Date),
       y: [item.Open, item.High, item.Low, item.Close],
     }));
-
     setSeries([{ data: transformedData }]);
+    setBrushSeries([{ data: transformedData }]);
   }, [companySelection, chartType, period]);
 
-  const options = {
+  const mainChartOptions = {
     chart: {
+      id: "candlestick-chart",
       type: `${chartType}`,
       height: 350,
     },
@@ -59,14 +61,48 @@ const ApexChart = ({ companySelection, chartType, period }) => {
     },
   };
 
+  const brushChartOptions = {
+    chart: {
+      id: "brush-chart",
+      height: 150,
+      type: "area",
+      brush: {
+        target: "candlestick-chart",
+        enabled: true,
+      },
+      selection: {
+        enabled: true,
+      },
+    },
+    xaxis: {
+      type: "datetime",
+    },
+    yaxis: {
+        tooltip: {
+          enabled: true,
+        },
+        labels: {
+          formatter: (value) => value.toFixed(2),
+        },
+      },
+  };
+
   return (
     <div>
-      <div id="chart">
+      <div id="main-chart">
         <ReactApexChart
-          options={options}
+          options={mainChartOptions}
           series={series}
           type={chartType}
-          height={550}
+          height={350}
+        />
+      </div>
+      <div id="brush-chart">
+        <ReactApexChart
+          options={brushChartOptions}
+          series={brushSeries}
+          type="area"
+          height={150}
         />
       </div>
       <div id="html-dist"></div>
@@ -80,7 +116,7 @@ const Apex = ({ companySelection }) => {
 
   return (
     <>
-      <div className="flex justify-between items-center gap-4 p-4 ">
+      <div className="flex justify-between items-center gap-4 p-4">
         <div className="flex gap-4">
           <div
             className={`${
@@ -116,7 +152,6 @@ const Apex = ({ companySelection }) => {
           </div>
         </div>
         <div>
-          {/* Chart Type Selection Dropdown */}
           <select
             value={chartType}
             onChange={(e) => setChartType(e.target.value)}
