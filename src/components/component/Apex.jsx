@@ -31,7 +31,7 @@ const ApexChart = ({ companySelection }) => {
                 enabled: true
             },
             labels: {
-                formatter: (value) => value.toFixed(2) // Format the y-axis values to 2 decimal places
+                formatter: (value) => value.toFixed(2) 
             }
         }
     };
