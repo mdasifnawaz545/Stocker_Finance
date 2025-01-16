@@ -1,36 +1,18 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable react/prop-types */
+import { useState, useEffect } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import data from '../../constant/data';
 
 const ApexChart = ({ companySelection }) => {
     const [series, setSeries] = useState([]);
-
-    const filterData = data.filter(item => item.Name === companySelection);
-
-    // Transform the filtered data for the chart
-    const transformedData = filterData.map(item => ({
-        x: new Date(),
-        y: [item.Open, item.High, item.Low, item.Close]
-    }));
-
-    // Update the chart's series with the new transformed data
-    setSeries([{ data: transformedData }]);
-    console.log(series)
-
-    // useEffect(() => {
-    //     // Filter data based on selected company name
-    //     const filterData = data.filter(item => item.Name === companySelection);
-
-    //     // Transform the filtered data for the chart
-    //     const transformedData = filterData.map(item => ({
-    //         x: new Date(),
-    //         y: [item.Open, item.High, item.Low, item.Close]
-    //     }));
-
-    //     // Update the chart's series with the new transformed data
-    //     setSeries([{ data: transformedData }]);
-    //     console.log(series)
-    // }, [companySelection]); // Runs whenever companySelection changes
+    useEffect(() => {
+        const filterData = data.filter(item => item.Name === companySelection);
+        const transformedData = filterData.map(item => ({
+            x: new Date(item.Date),
+            y: [item.Open, item.High, item.Low, item.Close]
+        }));
+        setSeries([{ data: transformedData }]);
+    }, [companySelection]);
 
     const options = {
         chart: {
@@ -47,6 +29,9 @@ const ApexChart = ({ companySelection }) => {
         yaxis: {
             tooltip: {
                 enabled: true
+            },
+            labels: {
+                formatter: (value) => value.toFixed(2) // Format the y-axis values to 2 decimal places
             }
         }
     };
