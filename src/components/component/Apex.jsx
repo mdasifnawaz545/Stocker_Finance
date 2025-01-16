@@ -45,7 +45,7 @@ const ApexChart = ({ companySelection, chartType, period }) => {
       height: 350,
     },
     title: {
-      text: `${companySelection} CandleStick Chart`,
+      text: ``,
       align: "left",
     },
     xaxis: {
@@ -94,7 +94,7 @@ const ApexChart = ({ companySelection, chartType, period }) => {
           options={mainChartOptions}
           series={series}
           type={chartType}
-          height={350}
+          height={320}
         />
       </div>
       <div id="brush-chart">
@@ -102,7 +102,7 @@ const ApexChart = ({ companySelection, chartType, period }) => {
           options={brushChartOptions}
           series={brushSeries}
           type="area"
-          height={150}
+          height={120}
         />
       </div>
       <div id="html-dist"></div>
@@ -116,39 +116,39 @@ const Apex = ({ companySelection }) => {
 
   return (
     <>
-      <div className="flex justify-between items-center gap-4 p-4">
-        <div className="flex gap-4">
+      <div className="flex justify-between items-center gap-4 p-1">
+        <div className="flex gap-4 scale-75 -mb-8">
           <div
             className={`${
-              period === "1m" ? "bg-blue-500" : "bg-green-400"
-            } rounded-xl px-2 py-1 cursor-pointer`}
+              period === "1m" ? "bg-gray-300" : "bg-gray-300"
+            } rounded-xl cursor-pointer flex hover:shadow-lg duration-300 items-center justify-center px-4 `}
             onClick={() => setPeriod("1m")}
           >
-            1 m
+            1M
           </div>
           <div
             className={`${
-              period === "6m" ? "bg-blue-500" : "bg-green-400"
-            } rounded-xl px-2 py-1 cursor-pointer`}
+              period === "6m" ? "bg-gray-300" : "bg-gray-300"
+            } rounded-xl px-2 py-1 cursor-pointer hover:shadow-lg duration-300  flex items-center justify-center px-4`}
             onClick={() => setPeriod("6m")}
           >
-            6 m
+            6M
           </div>
           <div
             className={`${
-              period === "1y" ? "bg-blue-500" : "bg-green-400"
-            } rounded-xl px-2 py-1 cursor-pointer`}
+              period === "1y" ? "bg-gray-300" : "bg-gray-300"
+            } rounded-xl px-2 py-1 cursor-pointer hover:shadow-lg duration-300  flex items-center justify-center px-4`}
             onClick={() => setPeriod("1y")}
           >
-            1 y
+            1Y
           </div>
           <div
             className={`${
-              period === "overall" ? "bg-blue-500" : "bg-green-400"
-            } rounded-xl px-2 py-1 cursor-pointer`}
+              period === "overall" ? "bg-gray-300" : "bg-gray-300"
+            } rounded-xl px-2 py-1 cursor-pointer hover:shadow-lg duration-300  flex items-center justify-center px-4`}
             onClick={() => setPeriod("overall")}
           >
-            Overall
+            ALL TIME
           </div>
         </div>
         <div>

@@ -5,10 +5,10 @@ import LeftCard from '../component/LeftCard.jsx'
 const Home = () => {
   const [companySelection, setCompanySelection] = useState("")
   return (
-    <div className=' flex w-full'>
-      <div className=' w-1/6'><LeftCard setCompanySelection={setCompanySelection} companySelection={companySelection} />
+    <div className=' flex w-full overflow-x-hidden'>
+      <div ><LeftCard setCompanySelection={setCompanySelection} companySelection={companySelection} />
       </div>
-      <div className=' w-5/6'><Apex companySelection={companySelection} />
+      <div className='w-full'><Apex companySelection={companySelection} />
       </div>
     </div>
   )
