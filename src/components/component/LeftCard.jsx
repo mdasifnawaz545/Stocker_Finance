@@ -25,7 +25,7 @@ const LeftCard = ({ setCompanySelection }) => {
 
 
     return (
-        <div className="">
+        <div className="border-r-2 border-gray-100">
 
             {companyName.map((name) => (
                 <div className='w-96 text-sm flex items-center hover:scale-105 duration-300 justify-between p-2 px-4 border-b-[1px] border-gray-200 h-11 bg-myWhite' onClick={() => setName(name)}>

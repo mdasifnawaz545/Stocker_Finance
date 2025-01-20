@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import ReactApexChart from "react-apexcharts";
 import data from "../../constant/data";
+import { Select, SelectSection, SelectItem } from "@heroui/select";
 
 const ApexChart = ({ companySelection, chartType, period }) => {
   const [series, setSeries] = useState([]);
@@ -78,13 +79,13 @@ const ApexChart = ({ companySelection, chartType, period }) => {
       type: "datetime",
     },
     yaxis: {
-        tooltip: {
-          enabled: true,
-        },
-        labels: {
-          formatter: (value) => value.toFixed(2),
-        },
+      tooltip: {
+        enabled: true,
       },
+      labels: {
+        formatter: (value) => value.toFixed(2),
+      },
+    },
   };
 
   return (
@@ -113,46 +114,48 @@ const ApexChart = ({ companySelection, chartType, period }) => {
 const Apex = ({ companySelection }) => {
   const [chartType, setChartType] = useState("candlestick");
   const [period, setPeriod] = useState("overall");
+  const animals = [
+    { key: "candlestick", label: "Candlestick" },
+    { key: "area", label: "Area" },
+    { key: "line", label: "Line" },
+    { key: "bar", label: "Bar" },
 
+  ];
   return (
     <>
-      <div className="flex justify-between items-center gap-4 p-1">
+      <div className="flex justify-between items-center gap-4 py-4 px-2">
         <div className="flex gap-4 scale-75 -mb-8">
           <div
-            className={`${
-              period === "1m" ? "bg-gray-300" : "bg-gray-300"
-            } rounded-xl cursor-pointer flex hover:shadow-lg duration-300 items-center justify-center px-4 `}
+            className={`${period === "1m" ? "bg-gray-300" : "bg-gray-300"
+              } rounded-xl cursor-pointer flex hover:shadow-lg duration-300 items-center justify-center px-4 `}
             onClick={() => setPeriod("1m")}
           >
             1M
           </div>
           <div
-            className={`${
-              period === "6m" ? "bg-gray-300" : "bg-gray-300"
-            } rounded-xl px-2 py-1 cursor-pointer hover:shadow-lg duration-300  flex items-center justify-center px-4`}
+            className={`${period === "6m" ? "bg-gray-300" : "bg-gray-300"
+              } rounded-xl px-2 py-1 cursor-pointer hover:shadow-lg duration-300  flex items-center justify-center px-4`}
             onClick={() => setPeriod("6m")}
           >
             6M
           </div>
           <div
-            className={`${
-              period === "1y" ? "bg-gray-300" : "bg-gray-300"
-            } rounded-xl px-2 py-1 cursor-pointer hover:shadow-lg duration-300  flex items-center justify-center px-4`}
+            className={`${period === "1y" ? "bg-gray-300" : "bg-gray-300"
+              } rounded-xl px-2 py-1 cursor-pointer hover:shadow-lg duration-300  flex items-center justify-center px-4`}
             onClick={() => setPeriod("1y")}
           >
             1Y
           </div>
           <div
-            className={`${
-              period === "overall" ? "bg-gray-300" : "bg-gray-300"
-            } rounded-xl px-2 py-1 cursor-pointer hover:shadow-lg duration-300  flex items-center justify-center px-4`}
+            className={`${period === "overall" ? "bg-gray-300" : "bg-gray-300"
+              } rounded-xl px-2 py-1 cursor-pointer hover:shadow-lg duration-300  flex items-center justify-center px-4`}
             onClick={() => setPeriod("overall")}
           >
             ALL TIME
           </div>
         </div>
-        <div>
-          <select
+        <div className="w-48 h-12 flex items-center justify-center">
+          {/* <select
             value={chartType}
             onChange={(e) => setChartType(e.target.value)}
           >
@@ -160,7 +163,12 @@ const Apex = ({ companySelection }) => {
             <option value="area">Area</option>
             <option value="line">Line</option>
             <option value="bar">Bar</option>
-          </select>
+          </select> */}
+          <Select className="max-w-xs" value={"candlestick"} label="Select a chart" onChange={(e) => setChartType(e.target.value)}>
+            {animals.map((animal) => (
+              <SelectItem key={animal.key}>{animal.label}</SelectItem>
+            ))}
+          </Select>
         </div>
       </div>
       <div>
