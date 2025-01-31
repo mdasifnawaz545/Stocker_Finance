@@ -1,7 +1,12 @@
 "use client"
 import { RiNotification2Line } from "react-icons/ri";
+import { firebaseUserAuth } from "../../lib/firebase";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 export default function Navbar() {
+  const user = useSelector((store) => (store.user));
+
   return (
     <nav className="md:w-full px-8 text-sm flex items-center justify-center h-12 border-b-1 border-gray-200 shadow-sm ">
       { // use h-[30vh] if you do not want to resize your navbar size.
@@ -24,7 +29,7 @@ export default function Navbar() {
           <li>
             <img src="https://res.cloudinary.com/dpqdgcipi/image/upload/v1737050200/user_pjhcj0.png" width={20} alt="User" />
           </li>
-          <li>{`${"Group 16"}`}</li>
+          <li>{`${user.name}`}</li>
         </div>
 
       </div>

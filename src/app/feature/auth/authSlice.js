@@ -6,7 +6,7 @@ const initialState = {
         email: "mdasifnawaz",
         phone: 7761054431,
         password: "",
-        rePassword: ""
+        confirmPassword: ""
     }
 }
 
